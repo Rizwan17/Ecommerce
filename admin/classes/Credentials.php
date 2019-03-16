@@ -75,7 +75,7 @@ if (isset($_POST['admin_login'])) {
 	extract($_POST);
 	if (!empty($email) && !empty($password)) {
 		$c = new Credentials();
-		$result = $c->loginAdmin("rizwan@gmail.com", "12345");
+		$result = $c->loginAdmin($email, $password);
 		echo json_encode($result);
 		exit();
 	}else{
