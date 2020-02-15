@@ -1,4 +1,5 @@
 <?php
+//require "config/constants.php";
 
 session_start();
 if(!isset($_SESSION["uid"])){
@@ -58,7 +59,7 @@ if(!isset($_SESSION["uid"])){
 											<div class="col-md-6">
 												<table>
 													<tr><td>Product Name</td><td><b><?php echo $row["product_title"]; ?></b> </td></tr>
-													<tr><td>Product Price</td><td><b><?php echo "$ ".$row["product_price"]; ?></b></td></tr>
+													<tr><td>Product Price</td><td><b><?php echo  CURRENCY." ".$row["product_price"]; ?></b></td></tr>
 													<tr><td>Quantity</td><td><b><?php echo $row["qty"]; ?></b></td></tr>
 													<tr><td>Transaction Id</td><td><b><?php echo $row["trx_id"]; ?></b></td></tr>
 												</table>

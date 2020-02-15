@@ -1,5 +1,6 @@
 <?php
 
+require "config/constants.php";
 
 ?>
 <!DOCTYPE html>
@@ -59,7 +60,7 @@
 							<div class="col-md-2 col-xs-2"><b>Product Name</b></div>
 							<div class="col-md-2 col-xs-2"><b>Quantity</b></div>
 							<div class="col-md-2 col-xs-2"><b>Product Price</b></div>
-							<div class="col-md-2 col-xs-2"><b>Price in $</b></div>
+							<div class="col-md-2 col-xs-2"><b>Price in <?php echo CURRENCY; ?></b></div>
 						</div>
 						<div id="cart_checkout"></div>
 						<!--<div class="row">
@@ -88,6 +89,8 @@
 			<div class="col-md-2"></div>
 			
 		</div>
+
+<script>var CURRENCY = '<?php echo CURRENCY; ?>';</script>
 </body>	
 </html>
 
