@@ -14,7 +14,7 @@ class Actions {
 	}
 
 	public function getProducts(){
-
+		$product_query = "SELECT * FROM products LIMIT $start,$limit";
 	}
 }
 
