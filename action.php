@@ -2,6 +2,7 @@
 session_start();
 $ip_add = getenv("REMOTE_ADDR");
 include "db.php";
+include "./Models/Product.php";
 
 class Actions {
 
