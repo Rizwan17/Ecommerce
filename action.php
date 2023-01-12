@@ -2,6 +2,22 @@
 session_start();
 $ip_add = getenv("REMOTE_ADDR");
 include "db.php";
+
+class Actions {
+
+	public function getCategories(){
+
+	}
+
+	public function getBrands(){
+
+	}
+
+	public function getProducts(){
+
+	}
+}
+
 if(isset($_POST["category"])){
 	$category_query = "SELECT * FROM categories";
 	$run_query = mysqli_query($con,$category_query) or die(mysqli_error($con));
@@ -38,6 +54,7 @@ if(isset($_POST["brand"])){
 		echo "</div>";
 	}
 }
+// todo
 if(isset($_POST["page"])){
 	$sql = "SELECT * FROM products";
 	$run_query = mysqli_query($con,$sql);
@@ -83,6 +100,7 @@ if(isset($_POST["getProduct"])){
 		}
 	}
 }
+// todo
 if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isset($_POST["search"])){
 	if(isset($_POST["get_seleted_Category"])){
 		$id = $_POST["cat_id"];
