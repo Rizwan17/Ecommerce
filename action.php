@@ -23,7 +23,13 @@ class Actions {
 
 	}
 }
-$name = "Vernacular Test";
+
+function label($str){
+	return "vernac label";
+}
+
+
+$name = label($str);
 echo $name;
 if(isset($_POST["category"])){
 	$category_query = "SELECT * FROM categories";
