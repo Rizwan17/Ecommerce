@@ -18,6 +18,10 @@ class Actions {
 		$limt = 20;
 		$product_query = "SELECT * FROM products LIMIT $start, $limit";
 	}
+
+	public function getPages(){
+		
+	}
 }
 
 if(isset($_POST["category"])){
