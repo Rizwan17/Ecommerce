@@ -14,8 +14,9 @@ class Actions {
 
 	}
 
-	public function getProducts(){
-		$product_query = "SELECT * FROM products LIMIT $start,$limit";
+	public function getProducts($start, $limit){
+		$limt = 20;
+		$product_query = "SELECT * FROM products LIMIT $start, $limit";
 	}
 }
 
