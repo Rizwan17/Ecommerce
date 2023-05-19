@@ -28,23 +28,13 @@ class User_Model extends Model {
                     $_SESSION['uid'] = $row["user_id"];
                     $_SESSION['name'] = $row["name"];
 
-                    return [
-                        "status" => 200,
-                        "message" => "login success",
-                        "data" => $row
-                    ];
+                    $this->returnResult(200, "login Success", $row);
                 }else{
-                    return [
-                        "status" => 400,
-                        "message" => "login failed! Incorrect email or password"
-                    ];
+                    $this->returnResult(400, "login failed! Incorrect email or password");
                 }
             }
         }catch(Exception $e){
-            return [
-                "status" => 500,
-                "message" => $e->getMessage()
-            ];
+            $this->returnResult(500, $e->getMessage());
         }
     }
 
@@ -97,7 +87,7 @@ class User_Model extends Model {
                 return $this->returnResult(500, 'Missing Params');
             }
         }catch(Exception $e){
-            $this->returnResult(500, $e->getMessage()); 
+            $this->returnResult(500, $e->getMessage());
         }
 
     }
