@@ -19,7 +19,7 @@
         <ul class="nav">
         <?php
           if(!isset($_SESSION['uid'])){
-            ?><li><a href="login.php" class="nav-link px-2 link-body-emphasis">Login</a></li><?php
+            ?><li><a href="<?php echo getHref("login.php"); ?>" class="nav-link px-2 link-body-emphasis">Login</a></li><?php
           }
         ?>
           <li>

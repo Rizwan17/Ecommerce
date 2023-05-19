@@ -26,7 +26,9 @@ loadHtmlView("header");
         <div class="checkbox mb-3">
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Signup</button>
-        <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+        <p class="mt-5 mb-3 text-body-secondary">
+            Already have an account yet? <a href="<?php echo getHref("login.php"); ?>">Login</a>
+        </p>
     </form>
 </main>
 <script src="<?php echo getJSScript("httpRequest"); ?>"></script>

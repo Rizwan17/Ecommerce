@@ -1,20 +1,8 @@
 <?php
-
 loadModel('Model');
-
 class Cart_Model extends Model {
-
-    public $con = null;
-
     public function __construct(){
-
-        $servername = HOST;
-        $username = USER;
-        $password = PASSWORD;
-        $db = DATABASE_NAME;
-
-        // Create connection
-        $this->con = mysqli_connect($servername, $username, $password,$db);
+        parent::__construct();
     }
 
     public function getUserCartDetails($userId = null){

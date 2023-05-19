@@ -1,6 +1,17 @@
 <?php
 
 class Model{
+
+    public $con = null;
+
+    public function __construct(){
+        $servername = HOST;
+        $username = USER;
+        $password = PASSWORD;
+        $db = DATABASE_NAME;
+        // Create connection
+        $this->con = mysqli_connect($servername, $username, $password,$db);
+    }
     public function mysqli_array_result($con, $sql){
         try{
             $query = mysqli_query($con, $sql);

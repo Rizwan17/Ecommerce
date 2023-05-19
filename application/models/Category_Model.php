@@ -1,18 +1,9 @@
 <?php
+loadModel("Model");
 
-class Category_Model {
-
-    public $con = null;
-
+class Category_Model extends Model {
     public function __construct(){
-
-        $servername = HOST;
-        $username = USER;
-        $password = PASSWORD;
-        $db = DATABASE_NAME;
-
-        // Create connection
-        $this->con = mysqli_connect($servername, $username, $password,$db);
+        parent::__construct();
     }
 
     public function getCategories(){

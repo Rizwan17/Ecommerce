@@ -3,18 +3,8 @@
 loadModel('Model');
 
 class User_Model extends Model {
-
-    public $con = null;
-
     public function __construct(){
-
-        $servername = HOST;
-        $username = USER;
-        $password = PASSWORD;
-        $db = DATABASE_NAME;
-
-        // Create connection
-        $this->con = mysqli_connect($servername, $username, $password,$db);
+        parent::__construct();
     }
 
     public function login($email = null, $password = null){
@@ -28,13 +18,13 @@ class User_Model extends Model {
                     $_SESSION['uid'] = $row["user_id"];
                     $_SESSION['name'] = $row["name"];
 
-                    $this->returnResult(200, "login Success", $row);
+                    return $this->returnResult(200, "login Success", $row);
                 }else{
-                    $this->returnResult(400, "login failed! Incorrect email or password");
+                    return $this->returnResult(400, "login failed! Incorrect email or password");
                 }
             }
         }catch(Exception $e){
-            $this->returnResult(500, $e->getMessage());
+            return $this->returnResult(500, $e->getMessage());
         }
     }
 

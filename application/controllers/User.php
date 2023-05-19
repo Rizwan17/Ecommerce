@@ -15,7 +15,7 @@ class User extends Api {
 
     public function login(){
         if($_SERVER['REQUEST_METHOD'] !== 'POST')
-            return json_encode(["status" => 400, "message" => "Invalid Request Method"]);
+            return $this->invalidRequestType();
         
         $this->validateInput($this->JSON);
         

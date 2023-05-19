@@ -18,7 +18,9 @@ loadHtmlView("header");
         <div class="checkbox mb-3">
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+        <p class="mt-5 mb-3 text-body-secondary">
+            Dont have an account yet? <a href="<?php echo getHref("signup.php"); ?>">Signup</a>
+        </p>
     </form>
 </main>
 <script src="<?php echo getJSScript("httpRequest"); ?>"></script>
@@ -63,7 +65,12 @@ async function login(e) {
                 location.href = routes.HOME;
             }
         } else {
-            showToast('Login Failed', 'error');
+            if(jsonResp.message){
+                showToast(jsonResp.message, 'error');
+            }else{
+                showToast('Login Failed', 'error');
+            }
+            
         }
     } catch (error) {
         console.log(error);
