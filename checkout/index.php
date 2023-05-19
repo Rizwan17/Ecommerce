@@ -6,134 +6,131 @@ loadHtmlView("header");
 <?php loadHtmlView("nav-header"); ?>
 <style>
 .confirm-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: #ffffff;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .confirm-button:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .confirm-button:focus {
-  outline: none;
+    outline: none;
 }
 
 .confirm-button:active {
-  background-color: #3e8e41;
+    background-color: #3e8e41;
 }
 
 .add-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #ffffff;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .add-button:hover {
-  background-color: #0069d9;
+    background-color: #0069d9;
 }
 
 .add-button:focus {
-  outline: none;
+    outline: none;
 }
 
 .add-button:active {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 .card {
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .card-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .card-content {
-  font-size: 14px;
-  line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .card-button {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #ffffff;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .card-button:hover {
-  background-color: #0069d9;
+    background-color: #0069d9;
 }
 
 .card-button:focus {
-  outline: none;
+    outline: none;
 }
 
 .card-button:active {
-  background-color: #0056b3;
+    background-color: #0056b3;
 }
 
 
 .payment-option {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .payment-option input[type="radio"] {
-  display: none;
+    display: none;
 }
 
 .payment-option label {
-  display: inline-block;
-  padding-left: 30px;
-  position: relative;
-  cursor: pointer;
-  font-size: 16px;
+    display: inline-block;
+    padding-left: 30px;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .payment-option label:before {
-  content: "";
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #007bff;
-  border-radius: 50%;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.payment-option input[type="radio"]:checked + label:before {
-  background-color: #007bff;
+.payment-option input[type="radio"]:checked+label:before {
+    background-color: #007bff;
 }
-
-
-
 </style>
 <main class="container">
     <section class="address__container">
@@ -150,7 +147,7 @@ loadHtmlView("header");
                 <button class="add-button" onclick="showAddressForm(this)">Add New Address</button>
             </div>
         </div>
-        
+
         <div class="add-address d-none">
             <h2>Add New Address</h2>
             <form id="address-form">
@@ -177,32 +174,34 @@ loadHtmlView("header");
     </section>
     <section class="card selected-address d-none">
         <h2 class="card-title">Delivery Address</h2>
-        <div class="card-content address-content"> <!-- delivery address placeholder -->  </div>
+        <div class="card-content address-content">
+            <!-- delivery address placeholder -->
+        </div>
         <button onclick="editAddress(this)" class="card-button">Edit Address</button>
     </section>
 
     <section class="card payment__container d-none">
         <h2 class="card-title">Select Payment Method</h2>
         <div class="card-content">
-            
-        <div class="payment-option">
-            <input type="radio" id="credit-card" name="payment" value="credit-card">
-            <label for="credit-card">Credit Card</label>
+
+            <div class="payment-option">
+                <input type="radio" id="credit-card" name="payment" value="credit-card">
+                <label for="credit-card">Credit Card</label>
             </div>
 
             <div class="payment-option">
-            <input type="radio" id="paypal" name="payment" value="paypal">
-            <label for="paypal">PayPal</label>
+                <input type="radio" id="paypal" name="payment" value="paypal">
+                <label for="paypal">PayPal</label>
             </div>
 
             <div class="payment-option">
-            <input type="radio" id="stripe" name="payment" value="stripe">
-            <label for="stripe">Stripe</label>
-        </div>
+                <input type="radio" id="stripe" name="payment" value="stripe">
+                <label for="stripe">Stripe</label>
+            </div>
 
 
         </div>
-        
+
         <button onclick="continuePayment(this)" class="card-button payment-button">Continue to Payment</button>
     </section>
 </main>
@@ -210,14 +209,13 @@ loadHtmlView("header");
 
 <script src="<?php echo getJSScript("httpRequest"); ?>"></script>
 <script>
-
 const addAddressHtmlBlock = document.querySelector('.add-address');
 const paymentContainerHtmlBlock = document.querySelector('.payment__container');
 const addressContainerHtmlBlock = document.querySelector('.address__container');
 const selectedAddressHtmlBlock = document.querySelector('.selected-address');
 let selectedAddress;
 
-const showAddressForm = (el) => { 
+const showAddressForm = (el) => {
     addAddressHtmlBlock.classList.remove('d-none');
 }
 const hideAddressForm = () => {
@@ -232,7 +230,14 @@ const confirmAddress = (el) => {
     const addressList = document.querySelector('.address-list');
     const deliveryAddress = addressList.getAttribute('delivery-address');
     const selectedDeliveryAddress = JSON.parse(deliveryAddress);
-    const { name, address, city, state, zip_code, phone_number } = selectedDeliveryAddress || {};
+    const {
+        name,
+        address,
+        city,
+        state,
+        zip_code,
+        phone_number
+    } = selectedDeliveryAddress || {};
     selectedAddress = selectedDeliveryAddress;
 
     const addressContentHtml = document.querySelector('.address-content');
@@ -245,7 +250,7 @@ const confirmAddress = (el) => {
     addressContentHtml.innerHTML = '';
     addressContentHtml.appendChild(h6);
     addressContentHtml.appendChild(p);
-    
+
 }
 
 const editAddress = (el) => {
@@ -253,26 +258,28 @@ const editAddress = (el) => {
     addressContainerHtmlBlock.classList.remove('d-none');
     selectedAddressHtmlBlock.classList.add('d-none')
 }
-  
+
 
 const getUserAddress = async () => {
     const userAddress = await fetchUserAddress();
-    console.log({userAddress});
+    console.log({
+        userAddress
+    });
     renderAddressHtml(userAddress);
 }
 
 const getSelectedPaymentOption = () => {
-  const paymentOptions = document.getElementsByName('payment');
-  let selectedOption;
+    const paymentOptions = document.getElementsByName('payment');
+    let selectedOption;
 
-  for (var i = 0; i < paymentOptions.length; i++) {
-    if (paymentOptions[i].checked) {
-      selectedOption = paymentOptions[i].value;
-      break;
+    for (var i = 0; i < paymentOptions.length; i++) {
+        if (paymentOptions[i].checked) {
+            selectedOption = paymentOptions[i].value;
+            break;
+        }
     }
-  }
 
-  return selectedOption;
+    return selectedOption;
 }
 
 
@@ -286,14 +293,21 @@ const submitAddress = async (e) => {
     const zip = document.getElementById('zip').value;
     const phone_number = document.getElementById('phone_number').value;
 
-    try{
-        const payload = { name, address, city, state, zip_code: zip, phone_number };
+    try {
+        const payload = {
+            name,
+            address,
+            city,
+            state,
+            zip_code: zip,
+            phone_number
+        };
         const resp = await addAddress(payload);
-        if(resp.status === 201){
+        if (resp.status === 201) {
             hideAddressForm();
             getUserAddress();
         }
-    }catch(e){
+    } catch (e) {
         console.log(e);
     }
 }
@@ -312,21 +326,25 @@ function selectPaymentMethod(element) {
     element.classList.add('selected');
 }
 
-async function continuePayment(el){
+async function continuePayment(el) {
     //window.location.href = 'order-success.php';
     const paymode = getSelectedPaymentOption();
     const userCartItems = await fetchUserCartItems();
-    if(paymode){
+    if (paymode) {
         const payload = {
-            cart: userCartItems.map(item => ({ productId: item.product_id, qty: item.cartQty })),
+            cart: userCartItems.map(item => ({
+                productId: item.product_id,
+                qty: item.cartQty
+            })),
             address: selectedAddress,
             paymode
         };
 
-        console.log({ payload })
+        console.log({
+            payload
+        })
     }
 
-  
-}
 
+}
 </script>
