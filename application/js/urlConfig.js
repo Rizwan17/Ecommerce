@@ -22,7 +22,8 @@ const routes = {
     CHECKOUT: `${CONSTANTS.PROJECT_NAME}/checkout`,
     THANKYOU: `${CONSTANTS.PROJECT_NAME}/thankyou`,
     ORDERS: `${CONSTANTS.PROJECT_NAME}/orders`,
-    ORDER_DETAILS: `${CONSTANTS.PROJECT_NAME}/order-details.php`
+    ORDER_DETAILS: `${CONSTANTS.PROJECT_NAME}/order-details.php`,
+    ORDER_SUCCESS: `${CONSTANTS.PROJECT_NAME}/order-success.php`
 };
 
 for(let route in routes){

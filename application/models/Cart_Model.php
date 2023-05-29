@@ -41,6 +41,23 @@ class Cart_Model extends Model {
         
     }
 
+    public function getCartCounts($userId = null){
+        try{
+            if($userId !== null){
+                $sql = "SELECT count(id) as `count` FROM cart WHERE cart.user_id = '$userId'";
+
+                $result = $this->mysqli_array_result($this->con, $sql); 
+                if(count($result) > 0){
+                    return $this->returnResult(200, null, $result[0]);
+                }
+
+                return $this->returnResult(200, 'No Item on Cart', ['count' => 0]);
+            }
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
+
     public function addToCart($userId = null, $productId = null, $qty = null){
         try{
             if($userId !== null && $productId !== null){                
@@ -99,6 +116,31 @@ class Cart_Model extends Model {
                     return $this->returnResult(200 , null, $results);
                 }
                 
+            }
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
+
+    public function removeItemsFromCart($userId = null, $cart = []){
+        try{
+            if($userId !== null){
+                //DELETE FROM `cart` WHERE user_id = 3 AND (p_id = 2 OR p_id = 4)
+                $del_condition = '';
+                foreach($cart as $item){
+                    $pid = $item['productId'];
+                    $del_condition .= 'p_id = ' . $pid . ' OR ';
+                }
+
+                $delete_cond = substr($del_condition, 0, -4);
+                $delete_from_cart = "DELETE FROM cart WHERE user_id = '$userId' AND ($delete_cond)";
+                mysqli_query($this->con, $delete_from_cart);
+
+                if(mysqli_affected_rows($this->con)){
+                    return $this->returnResult(200, count($cart) . 'cart Item Removed Successfully');
+                }else{
+                    return $this->returnResult(500, 'Something went wrong');
+                }
             }
         }catch(Exception $e){
             return $this->returnResult(500, $e->getMessage());

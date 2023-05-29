@@ -475,3 +475,83 @@ h2 {
 }
 
 /* toast messgae css end here */
+
+.nav{
+  position: relative;
+}
+
+.cart-item-count{
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  top: 0;
+  right: 0px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  opacity: 0;
+}
+
+/* order success pge */
+.order-success__container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  margin-top: 0;
+  color: #5da5db;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  text-align: left;
+}
+
+th,
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f5f5f5;
+}
+
+.total {
+  font-weight: bold;
+}
+
+.order-success__btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #5da5db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.order-success__btn:hover {
+  background-color: #4691c8;
+}
+/* order success page end */

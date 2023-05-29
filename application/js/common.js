@@ -1,3 +1,5 @@
+
+
 function showToast(message, type) {
     const toastContainer = document.getElementById("toast-container");
   
@@ -34,4 +36,38 @@ function validateUserInput(inputs = []){
 
     return errors;
 }
+
+const getAppData = async () => {
+  try{
+    const resp = await fetch(API.FETCH_APP_DATA);
+    const jsonResp = await resp.json();
+    return jsonResp;
+  }catch(error){
+    console.log({error});
+  }
+}
+
+const updateCartCount = async () => {
+  const isLoggedIn = isUserLoggedIn();
+  const cartCountEl = document.getElementById("cart-counts");
+  let cartCount = 0;
+
+  if(isLoggedIn){
+    const appData = await getAppData();
+    const cart = appData?.body?.cart;
+    cartCount = cart?.count || 0;
+  }else{
+    const cartDetails = getCartDetailsFromLocalStorage();
+    cartCount = cartDetails.length;
+  }
+
+  if(cartCount != 0){
+    cartCountEl.innerHTML = cartCount;
+    cartCountEl.style.opacity = 1;
+  }else{
+    cartCountEl.style.opacity = 0;
+  }
   
+}
+  
+updateCartCount();

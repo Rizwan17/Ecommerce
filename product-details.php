@@ -61,6 +61,9 @@ function addToCart(el) {
         addToCartApiCall({
             productId
         });
+        
+
+
 
     } else {
         console.log(false);
@@ -69,5 +72,7 @@ function addToCart(el) {
 
         saveCartDetailsInLocalStorage(JSON.parse(product));
     }
+
+    updateCartCount();
 }
 </script>

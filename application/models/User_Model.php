@@ -85,7 +85,7 @@ class User_Model extends Model {
     public function fetchUserAddress($userId = null){
         try{
             if($userId !== null){
-                $sql = "SELECT `name`, `address`, `city` , `state`, `zip_code`, `phone_number` FROM `delivery_addresses` WHERE `user_id` = '$userId'";
+                $sql = "SELECT `id`, `name`, `address`, `city` , `state`, `zip_code`, `phone_number` FROM `delivery_addresses` WHERE `user_id` = '$userId'";
                 $result = $this->mysqli_array_result($this->con, $sql);
                 if(count($result) > 0){
                     return $this->returnResult(200, null, $result);

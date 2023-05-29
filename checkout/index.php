@@ -185,6 +185,10 @@ loadHtmlView("header");
         <div class="card-content">
 
             <div class="payment-option">
+                <input type="radio" id="cod" name="payment" value="cod">
+                <label for="cod">Cash On Delivery</label>
+            </div>
+            <div class="payment-option">
                 <input type="radio" id="credit-card" name="payment" value="credit-card">
                 <label for="credit-card">Credit Card</label>
             </div>
@@ -336,13 +340,15 @@ async function continuePayment(el) {
                 productId: item.product_id,
                 qty: item.cartQty
             })),
-            address: selectedAddress,
+            addressId: selectedAddress.id,
             paymode
         };
 
-        console.log({
-            payload
-        })
+        const resp = await createOrder(payload);
+        if(resp.status === 201){
+            const orderId = resp?.body?.metaData?.orderId || "";
+            location.href = routes.ORDER_SUCCESS + `?orderId=${orderId}`;
+        }
     }
 
 

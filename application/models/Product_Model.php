@@ -1,5 +1,5 @@
 <?php
-loadModel("Model.php");
+loadModel("Model");
 
 class Product_Model extends Model {
 

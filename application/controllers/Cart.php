@@ -41,6 +41,16 @@ class Cart extends Api {
             $this->response($result);
         }
     }
+
+    public function getCartCounts(){
+        if($_SERVER['REQUEST_METHOD'] !== 'GET'){
+            $this->invalidRequestType();
+        }else{
+            $userId = $_SESSION['uid'];
+            $result = $this->model->getCartCounts($userId);
+            $this->response($result);
+        }
+    }
     
 }
 

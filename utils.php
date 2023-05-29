@@ -38,7 +38,7 @@ function getStylesheet($filename){
 }
 
 function loadModel($model_name){
-    require ROOT . "/" . APP_DIR_NAME . "/application/models/" . $model_name . ".php";
+    require_once ROOT . "/" . APP_DIR_NAME . "/application/models/" . $model_name . ".php";
 }
 
 function loadController($controller_name){

@@ -5,7 +5,9 @@ const API = {
 	ADD_TO_CART: `${baseUrl}/cart/addToCart.php`,
 	CART_DETAILS: `${baseUrl}/cart/getCartDetails.php`,
 	ADD_ADDRESS: `${baseUrl}/user/addAddress.php`,
-	FETCH_USER_ADDRESS: `${baseUrl}/user/fetchUserAddress.php`
+	FETCH_USER_ADDRESS: `${baseUrl}/user/fetchUserAddress.php`,
+	FETCH_APP_DATA: `${baseUrl}/fetchAppData`,
+	CREATE_ORDER: `${baseUrl}/order/createOrder.php`
 };
 
 const isUserLoggedIn = () => {
@@ -207,6 +209,9 @@ const getUrlParams = (paramName) => {
 	// Access individual parameters
 	return JSON.parse(params.get(paramName));
 }
+
+
+
 
 
 
