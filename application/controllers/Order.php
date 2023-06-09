@@ -22,8 +22,6 @@ class Order extends Api {
             $result = $this->model->createOrder($userId, $cart, $addressId, $paymode);
             $this->response($result);
 
-            //$this->
-
         }
     }
 

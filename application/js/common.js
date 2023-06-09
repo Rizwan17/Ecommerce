@@ -4,7 +4,7 @@ function showToast(message, type) {
     const toastContainer = document.getElementById("toast-container");
   
     const toast = document.createElement("div");
-    toast.textContent = message;
+    toast.textContent = JSON.stringify(message);
     toast.className = `toast ${type}`;
   
     toastContainer.appendChild(toast);
@@ -69,5 +69,12 @@ const updateCartCount = async () => {
   }
   
 }
-  
-updateCartCount();
+ 
+const getTargetElement = (e, className) => {
+  let targetElement = e.target;
+  while (targetElement && !targetElement.matches(className)) {
+    targetElement = targetElement.parentElement;
+  }
+  return targetElement;
+};
+// updateCartCount();

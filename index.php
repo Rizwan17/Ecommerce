@@ -11,9 +11,11 @@ $product = new Product();
 $categories = $category->getCategories();
 
 if(isset($_GET['category']) && !empty($_GET['category'])){
-	$products = $product->getProductsByCategory($_GET['category']);
+	$resp = $product->getProductsByCategory($_GET['category']);
+    $products = $resp['data'];
 }else{
-	$products = $product->getProducts();
+	$resp = $product->getProducts();
+    $products = $resp['data'];
 }
 
 ?>

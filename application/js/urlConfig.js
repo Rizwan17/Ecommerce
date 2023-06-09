@@ -37,3 +37,21 @@ const baseUrl = url + api.replaceAll('//', '/');
 
 console.log({ baseUrl });
 
+// admin
+
+const adminUrl = '';
+
+const adminRoutes = {
+    HOME: `${CONSTANTS.PROJECT_NAME}/admin/index.php`,
+    LOGIN: `${CONSTANTS.PROJECT_NAME}/admin/login.php`
+}
+
+for(let route in adminRoutes){
+    adminRoutes[route] = url + '/' + adminRoutes[route].replaceAll(`//`, '/');
+}
+
+console.log({ adminRoutes });
+
+const adminBaseUrl = url + api.replaceAll('//', '/') + '/admin';
+
+console.log({ adminBaseUrl });

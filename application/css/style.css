@@ -555,3 +555,36 @@ th {
   background-color: #4691c8;
 }
 /* order success page end */
+
+
+/* index */
+.product-img-container{
+  width: 100%;
+  height: 255px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-img-container img{
+  max-width: 100%;
+  height: 240px;
+}
+/* index */
+
+
+/* product-details */
+.product-image{
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-image img{
+  max-width: 100%;
+  height: 100%;
+}
+/* product-details */

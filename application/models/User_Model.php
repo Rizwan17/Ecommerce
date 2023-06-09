@@ -99,4 +99,14 @@ class User_Model extends Model {
         }
     }
 
+    public function getCustomers(){
+        try{
+            $sql = "SELECT `user_id`,`name`,`email`,`mobile` FROM `user_info`";
+            $rows = $this->mysqli_array_result($this->con, $sql);
+            return $this->returnResult(200, null, $rows);
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
+
 }

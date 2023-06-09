@@ -53,6 +53,10 @@ function loadImage($filename){
     return getHttpProtocol() . HOSTNAME . "/" . APP_DIR_NAME . "/product-images/" . $filename;
 }
 
+function imageBaseUrl(){
+    return getHttpProtocol() . HOSTNAME . "/" . APP_DIR_NAME . "/product-images/";
+}
+
 function getHref($absoluteFilePath, $params = null){
     $path = "/" . APP_DIR_NAME . "/" . $absoluteFilePath;
     if($params !== null){
@@ -64,6 +68,18 @@ function getHref($absoluteFilePath, $params = null){
         return str_replace("//", "/", $path.$param);
     }
     return str_replace("//", "/", $path);
+}
+
+function imageUploadDir($filename){
+    return ROOT . "/" . APP_DIR_NAME . "/" . PRODUCT_IMAGES . "/" . $filename;
+}
+
+
+
+function p($ar){
+    echo "<pre>";
+    print_r($ar);
+    exit;
 }
 
 ?>

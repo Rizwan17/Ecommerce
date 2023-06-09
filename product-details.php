@@ -5,8 +5,11 @@ loadHtmlView("header");
 loadController('Product');
 
 $product = new Product();
-$products = $product->getProductById($_GET['id']);
-$prod = $products[0];
+$resp = $product->getProductById($_GET['id']);
+if($resp['status'] === 200){
+    $prod = $resp['data']['product'];
+}
+
 $jsonProduct = htmlspecialchars(json_encode($prod, ENT_QUOTES));
 
 ?>

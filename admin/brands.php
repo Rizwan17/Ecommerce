@@ -1,10 +1,19 @@
-<?php session_start(); ?>
-<?php include_once("./templates/top.php"); ?>
-<?php include_once("./templates/navbar.php"); ?>
+<?php 
+include "../utils.php";
+loadHtmlView('admin/header');
+loadHtmlView('admin/navbar');
+
+loadController('Admin/Brand');
+$brand = new Brand(); 
+$brands = $brand->getBrands();
+
+// p($brands);
+
+?>
 <div class="container-fluid">
   <div class="row">
     
-    <?php include "./templates/sidebar.php"; ?>
+    <?php loadHtmlView('admin/sidebar'); ?>
 
 
       <div class="row">
@@ -20,21 +29,23 @@
         <table class="table table-striped table-sm">
           <thead>
             <tr>
-              <th>#</th>
+              <th>Brand #</th>
               <th>Name</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody id="brand_list">
-            <!-- <tr>
-              <td>1</td>
-              <td>ABC</td>
-              <td>FDGR.JPG</td>
-              <td>122</td>
-              <td>eLECTRONCS</td>
-              <td>aPPLE</td>
-              <td><a class="btn btn-sm btn-info"></a><a class="btn btn-sm btn-danger">Delete</a></td>
-            </tr> -->
+            <?php 
+              foreach($brands as $brand){
+                ?>
+                  <tr>
+                    <td><?php echo $brand['brand_id']; ?></td>
+                    <td><?php echo $brand['brand_title']; ?></td>
+                    <td><a bid="<?php echo $brand['brand_id']; ?>" data-target="#edit_brand_modal" data-toggle="modal" class="btn btn-sm btn-info edit-brand" style="color:#fff;"><i class="fas fa-pencil-alt"></i></a>&nbsp;<a bid="<?php echo $brand['brand_id']; ?>" class="btn btn-sm btn-danger delete-brand" style="color:#fff;"><i class="fas fa-trash-alt"></i></a></td>
+                  </tr> 
+                <?php
+              }
+            ?>
           </tbody>
         </table>
       </div>
@@ -63,9 +74,8 @@
 		        		<input type="text" name="brand_title" class="form-control" placeholder="Enter Brand Name">
 		        	</div>
         		</div>
-        		<input type="hidden" name="add_brand" value="1">
         		<div class="col-12">
-        			<button type="button" class="btn btn-primary add-brand">Add Product</button>
+        			<button type="submit" class="btn btn-primary add-brand">Add Product</button>
         		</div>
         	</div>
         	
@@ -96,9 +106,9 @@
                 <input type="text" name="e_brand_title" class="form-control" placeholder="Enter Brand Name">
               </div>
             </div>
-            <input type="hidden" name="edit_brand" value="1">
+            <input type="hidden" name="e_brand_id" value="1">
             <div class="col-12">
-              <button type="button" class="btn btn-primary edit-brand-btn">Update Brand</button>
+              <button type="submit" class="btn btn-primary edit-brand-btn">Update Brand</button>
             </div>
           </div>
           
@@ -109,8 +119,10 @@
 </div>
 <!-- Modal -->
 
-<?php include_once("./templates/footer.php"); ?>
+<script src="<?php echo getJSScript('admin/brand'); ?>"></script>
+
+<?php loadHtmlView('admin/footer'); ?>
 
 
 
-<script type="text/javascript" src="./js/brands.js"></script>
+<!-- <script type="text/javascript" src="./js/brands.js"></script> -->

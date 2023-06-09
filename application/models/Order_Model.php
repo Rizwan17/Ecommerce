@@ -113,4 +113,17 @@ class Order_Model extends Model {
             return $this->returnResult(500, $e->getMessage());
         }
     }
+
+    public function getCustomerOrders(){
+        try{
+            $sql = "SELECT `order_id`, `user_id`, `total_order_amount`, `trx_id`, `p_status`, `paymode`, `created_at`, `updated_at` FROM `orders`";
+            $rows = $this->mysqli_array_result($this->con, $sql);
+            if(count($rows) > 0){
+                return $this->returnResult(200, null, $rows);
+            }
+            return $this->returnResult(200, null, []);
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
 }

@@ -7,5 +7,6 @@ define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "");
 define("DATABASE_NAME", "khanstore");
+define("PRODUCT_IMAGES", "product-images");
 
 ?>

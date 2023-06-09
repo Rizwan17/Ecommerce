@@ -1,19 +1,23 @@
 <?php 
-session_start();  
-if (!isset($_SESSION['admin_id'])) {
-  header("location:login.php");
-}
+include_once("../utils.php");
+loadHtmlView("admin/header");
 
-include "./templates/top.php"; 
+loadController("Admin/Admin");
+$admin = new Admin();
+$adminData = $admin->getAdminList();
+$admins = $adminData['data'];
+
+// echo "<pre>";
+// print_r($admins);
 
 ?>
  
-<?php include "./templates/navbar.php"; ?>
+<?php loadHtmlView("admin/navbar"); ?>
 
 <div class="container-fluid">
   <div class="row">
     
-    <?php include "./templates/sidebar.php"; ?>
+      <?php loadHtmlView('admin/sidebar'); ?>
 
       <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
 
@@ -30,13 +34,19 @@ include "./templates/top.php";
             </tr>
           </thead>
           <tbody id="admin_list">
-            <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
-            </tr>
+            <?php
+              foreach($admins as $admin){
+                ?>
+                  <tr>
+                    <td><?php echo $admin['id']; ?></td>
+                    <td><?php echo $admin['name']; ?></td>
+                    <td><?php echo $admin['email']; ?></td>
+                    <td><?php echo $admin['is_active']; ?></td>
+                    <td><a class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                  </tr>
+                <?php
+              }
+            ?>
           </tbody>
         </table>
       </div>
@@ -44,6 +54,4 @@ include "./templates/top.php";
   </div>
 </div>
 
-<?php include "./templates/footer.php"; ?>
-
-<script type="text/javascript" src="./js/admin.js"></script>
+<?php loadHtmlView("admin/footer"); ?>

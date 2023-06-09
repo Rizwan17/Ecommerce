@@ -1,23 +1,24 @@
 <?php
 loadModel("Model");
 
-class Category_Model extends Model {
+class Brand_Model extends Model {
     public function __construct(){
         parent::__construct();
     }
 
-    public function getCategories(){
-        $sql = "SELECT * FROM categories";
-        return $this->mysqli_array_result($this->con, $sql);
+    public function getBrands(){
+        $sql = "SELECT * FROM brands";
+        $rows = $this->mysqli_array_result($this->con, $sql);
+        return $rows;
     }
-
-    public function addCategory($categoryName = null){
+    
+    public function addBrand($brandName = null){
         try{
-            if($categoryName !== null){
-                $sql = "INSERT INTO categories (cat_title) VALUES ('$categoryName')";
+            if($brandName !== null){
+                $sql = "INSERT INTO brands (brand_title) VALUES ('$brandName')";
                 mysqli_query($this->con, $sql);
                 if(mysqli_affected_rows($this->con) > 0){
-                    return $this->returnResult(201, '1 New Category Added Successfully');
+                    return $this->returnResult(201, '1 New Brand Added Successfully');
                 }
                 return $this->returnResult(200, 'Something went wrong');
             }
@@ -26,13 +27,13 @@ class Category_Model extends Model {
         }
     }
 
-    public function deleteCategoryById($categoryId = null){
+    public function deleteBrandById($brandId = null){
         try{
-            if($categoryId !== null){
-                $sql = "DELETE FROM categories WHERE cat_id = '$categoryId'";
+            if($brandId !== null){
+                $sql = "DELETE FROM brands WHERE brand_id = '$brandId'";
                 mysqli_query($this->con, $sql);
                 if(mysqli_affected_rows($this->con) > 0){
-                    return $this->returnResult(200, '1 Category Removed');
+                    return $this->returnResult(200, '1 Brand Removed');
                 }
                 return $this->returnResult(200, 'Something went wrong');
             }
@@ -41,13 +42,13 @@ class Category_Model extends Model {
         }
     }
 
-    public function updateCategoryById($categoryId = null, $categoryName = null){
+    public function updateBrandById($brandId = null, $brandName = null){
         try{
-            if($categoryId !== null && $categoryName !== null){
-                $sql = "UPDATE categories SET cat_title = '$categoryName' WHERE cat_id = '$categoryId'";
+            if($brandId !== null && $brandName !== null){
+                $sql = "UPDATE brands SET brand_title = '$brandName' WHERE brand_id = '$brandId'";
                 mysqli_query($this->con, $sql);
                 if(mysqli_affected_rows($this->con) > 0){
-                    return $this->returnResult(201, '1 Category Updated');
+                    return $this->returnResult(201, '1 Brand Updated');
                 }
                 return $this->returnResult(200, 'Something went wrong');
             }
@@ -55,10 +56,10 @@ class Category_Model extends Model {
             return $this->returnResult(500, $e->getMessage());
         }
     }
-    public function getCategoryById($categoryId = null){
+    public function getBrandById($brandId = null){
         try{
-            if($categoryId !== null){
-                $sql = "SELECT * FROM categories WHERE cat_id = '$categoryId'";
+            if($brandId !== null){
+                $sql = "SELECT * FROM brands WHERE brand_id = '$brandId'";
                 $rows = $this->mysqli_array_result($this->con, $sql);
                 return $this->returnResult(200, null, $rows[0]);
             }

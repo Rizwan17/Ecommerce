@@ -12,10 +12,15 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
 
     <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+    <script defer src="<?php echo getJSScript("urlConfig"); ?>"></script>
+    <script defer src="<?php echo getJSScript("apiConfig"); ?>"></script>
+    <script defer src="<?php echo getJSScript("common"); ?>"></script>
+
+    <link rel="stylesheet" type="text/css" href="<?php echo getStylesheet("admin-style.css"); ?>" />
 
     <style>
       .fa-trash-alt,.fa-pencil-alt{
@@ -37,7 +42,8 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo getStylesheet("dashboard.css"); ?>" />
   </head>
 
- <body>
+ <body loggedin=<?php echo isset($_SESSION['admin_id']) ? true : false ; ?>>
+ <div id="toast-container"></div>
