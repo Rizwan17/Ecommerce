@@ -96,9 +96,9 @@ class Order_Model extends Model {
         }
     }
 
-    public function fetchOrderDetails($userId = null, $orderId = null){
+    public function fetchOrderDetails($orderId = null){
         try{
-            if($userId !== null && $orderId !== null){
+            if($orderId !== null){
                 $sql_orders = "SELECT order_details.product_id, order_qty, purchase_price, products.product_title, products.product_image ,order_details.created_at  
                 FROM `orders` 
                 JOIN order_details ON order_details.order_id = orders.order_id 

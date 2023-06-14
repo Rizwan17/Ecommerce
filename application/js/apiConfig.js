@@ -12,7 +12,9 @@ const ADMIN_API = {
 	ADD_CATEGORY: `${adminBaseUrl}/category/addCategory.php`,
 	DELETE_CATEGORY: `${adminBaseUrl}/category/deleteCategoryById.php`,
 	GET_CATEGORY_BY_ID: `${adminBaseUrl}/category/getCategoryById.php`,
-	UPDATE_CATEGORY: `${adminBaseUrl}/category/updateCategoryById.php`
+	UPDATE_CATEGORY: `${adminBaseUrl}/category/updateCategoryById.php`,
+	FETCH_ORDER_DETAILS_BY_ID: `${adminBaseUrl}/order/fetchOrderDetailsById.php`,
+	ADMIN_LOGOUT: `${adminBaseUrl}/logout.php`
 };
 
 const buildPayload = (payload, method = 'GET') => {

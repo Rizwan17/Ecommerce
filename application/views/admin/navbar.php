@@ -6,7 +6,7 @@
     	<?php
     		if (isset($_SESSION['admin_id'])) {
     			?>
-    				<a class="nav-link" href="../admin/admin-logout.php">Sign out</a>
+    				<a class="nav-link" href="#" id="admin-logout">Sign out</a>
     			<?php
     		}else{
     			$uriAr = explode("/", $_SERVER['REQUEST_URI']);

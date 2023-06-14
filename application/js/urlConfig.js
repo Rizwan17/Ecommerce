@@ -43,7 +43,13 @@ const adminUrl = '';
 
 const adminRoutes = {
     HOME: `${CONSTANTS.PROJECT_NAME}/admin/index.php`,
-    LOGIN: `${CONSTANTS.PROJECT_NAME}/admin/login.php`
+    LOGIN: `${CONSTANTS.PROJECT_NAME}/admin/login.php`,
+    REGISTER: `${CONSTANTS.PROJECT_NAME}/admin/register.php`,
+    BRANDS: `${CONSTANTS.PROJECT_NAME}/admin/brands.php`,
+    CATEGORIES: `${CONSTANTS.PROJECT_NAME}/admin/categories.php`,
+    CUSTOMER_ORDERS: `${CONSTANTS.PROJECT_NAME}/admin/customer_orders.php`,
+    CUSTOMERS: `${CONSTANTS.PROJECT_NAME}/admin/customers.php`,
+    PRODUCTS: `${CONSTANTS.PROJECT_NAME}/admin/products.php`,
 }
 
 for(let route in adminRoutes){
@@ -51,6 +57,11 @@ for(let route in adminRoutes){
 }
 
 console.log({ adminRoutes });
+
+const nonLoggedInRoutes = [
+    adminRoutes.LOGIN,
+    adminRoutes.REGISTER
+];
 
 const adminBaseUrl = url + api.replaceAll('//', '/') + '/admin';
 

@@ -1,5 +1,31 @@
 
 
+if(checkLoginState()){
+  const adminlogout = document.getElementById("admin-logout");
+  adminlogout.addEventListener('click', handleAdminLogout);
+}
+
+// if(!(checkLoginState() === false && nonLoggedInRoutes.includes(location.href))){
+//   location.href = adminRoutes.LOGIN;
+// }
+
+async function handleAdminLogout(e){
+  e.preventDefault();
+
+  try{
+    await fetch(ADMIN_API.ADMIN_LOGOUT);
+  }catch(error){
+    console.log(error);
+  }
+}
+
+function checkLoginState(){
+  const adminLoggedIn = document.body.getAttribute('loggedin');
+  console.log({ adminLoggedIn })
+  return adminLoggedIn === "1" ? true : false;
+}
+
+
 function showToast(message, type) {
     const toastContainer = document.getElementById("toast-container");
   
@@ -77,4 +103,8 @@ const getTargetElement = (e, className) => {
   }
   return targetElement;
 };
+
+
+
+
 // updateCartCount();

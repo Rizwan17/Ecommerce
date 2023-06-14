@@ -14,6 +14,16 @@ class Order extends Api {
         $result = $this->model->getCustomerOrders();
         return $result;
     }
+
+    public function fetchOrderDetailsById(){
+        if($_SERVER["REQUEST_METHOD"] !== "POST"){
+            $this->invalidRequestType();
+        }
+
+        $orderId = $_GET['orderId'];
+        $result = $this->model->fetchOrderDetails($orderId);
+        $this->response($result);
+    }
     
 }
 

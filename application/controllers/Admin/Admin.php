@@ -31,6 +31,13 @@ class Admin extends Api {
     public function deleteAdmin(){
     }
 
+    public function logout(){
+        unset($_SESSION["admin_name"]);
+        unset($_SESSION["admin_id"]);
+
+        header('location:/'); 
+    }
+
     
 
 

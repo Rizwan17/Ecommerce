@@ -1,6 +1,9 @@
-<?php include "./templates/top.php"; ?>
+<?php 
+include "../utils.php";
 
-<?php include "./templates/navbar.php"; ?>
+loadHtmlView('admin/header');
+loadHtmlView('admin/navbar'); 
+?>
 
 <div class="container">
 	<div class="row justify-content-center" style="margin:100px 0;">
@@ -32,10 +35,5 @@
 	</div>
 </div>
 
-
-
-
-
-<?php include "./templates/footer.php"; ?>
-
-<script type="text/javascript" src="./js/main.js"></script>
+<!-- <script src="<?php echo getJSScript('admin/login'); ?>"></script> -->
+<?php loadHtmlView('admin/footer'); ?>

@@ -33,7 +33,7 @@ class Order extends Api {
             $userId = $_SESSION['uid'];
             $orderId = $_GET['orderId'];
 
-            $result = $this->model->fetchOrderDetails($userId, $orderId);
+            $result = $this->model->fetchOrderDetails($orderId);
             //$this->response($result);
             return $result;
             

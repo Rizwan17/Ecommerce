@@ -23,3 +23,68 @@
   .toast.success {
     background-color: #4caf50;
   }
+
+
+  /* admin order details */
+  .orderlist_table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .orderlist_th, .orderlist_td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .orderlist_th {
+    background-color: #f2f2f2;
+  }
+
+  .orderlist_tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .orderlist_dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .orderlist_dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 100px;
+    z-index: 1;
+  }
+
+  .orderlist_dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .orderlist_dropdown:hover .orderlist_dropdown-content {
+    display: block;
+  }
+  
+  .orderlist_item_table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .orderlist_item_th, .orderlist_item_td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  .orderlist_item_th {
+    background-color: #f2f2f2;
+  }
+
+  .orderlist_item_tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  .orderlist_total {
+    font-weight: bold;
+  }

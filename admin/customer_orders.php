@@ -38,6 +38,7 @@ if($resp['status'] === 200){
                         <th>Paymode</th>
                         <th>Created At</th>
                         <th>Updated On</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody id="customer_order_list">
@@ -52,6 +53,9 @@ if($resp['status'] === 200){
                         <td> <?php echo $order['paymode']; ?> </td>
                         <td> <?php echo $order['created_at']; ?> </td>
                         <td> <?php echo $order['updated_at']; ?> </td>
+                        <td> <a data-toggle="modal" data-target="#order_details"
+                                class="btn btn-sm btn-info order-details" orderid="<?php echo $order['order_id']; ?>"
+                                style="color:#fff;"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                     <?php
 			} ?>
@@ -65,84 +69,45 @@ if($resp['status'] === 200){
 
 
 <!-- Modal -->
-<div class="modal fade" id="add_product_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="order_details" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Order Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="add-product-form" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Name</label>
-                                <input type="text" name="product_name" class="form-control"
-                                    placeholder="Enter Product Name">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Brand Name</label>
-                                <select class="form-control brand_list" name="brand_id">
-                                    <option value="">Select Brand</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Category Name</label>
-                                <select class="form-control category_list" name="category_id">
-                                    <option value="">Select Category</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Description</label>
-                                <textarea class="form-control" name="product_desc"
-                                    placeholder="Enter product desc"></textarea>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Price</label>
-                                <input type="number" name="product_price" class="form-control"
-                                    placeholder="Enter Product Price">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Keywords <small>(eg: apple, iphone, mobile)</small></label>
-                                <input type="text" name="product_keywords" class="form-control"
-                                    placeholder="Enter Product Keywords">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Product Image <small>(format: jpg, jpeg, png)</small></label>
-                                <input type="file" name="product_image" class="form-control">
-                            </div>
-                        </div>
-                        <input type="hidden" name="add_product" value="1">
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary add-product">Add Product</button>
-                        </div>
-                    </div>
-
-                </form>
-            </div>
+ <!-- Order Item List -->
+  <table class="orderlist_item_table">
+    <thead>
+      <tr>
+        <th class="orderlist_item_th">Product ID</th>
+        <th class="orderlist_item_th">Name</th>
+        <!-- <th class="orderlist_item_th">Image</th> -->
+        <th class="orderlist_item_th">Price</th>
+        <th class="orderlist_item_th">Quantity</th>
+      </tr>
+    </thead>
+    <tbody id="order-details-table">
+      <!-- Add more rows as needed -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="2" class="orderlist_total">Total:</td>
+        <td class="orderlist_total_price"></td>
+        <td class="orderlist_total orderlist_total_qty"></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
         </div>
     </div>
 </div>
 <!-- Modal -->
 
+<script src="<?php echo getJSScript("admin/order"); ?>"></script>
+
 <?php loadHtmlView('admin/footer'); ?>
-
-
-
-<script type="text/javascript" src="./js/customers.js"></script>
