@@ -21,7 +21,6 @@ loadHtmlView('admin/navbar');
                     <label for="password">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                 </div>
-                <input type="hidden" name="admin_login" value="1">
                 <button type="submit" class="btn btn-primary login-btn">Submit</button>
             </form>
         </div>

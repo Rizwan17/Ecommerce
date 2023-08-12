@@ -23,6 +23,20 @@ class Admin extends Api {
 
 	}
 
+    public function register(){
+		if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+            $this->invalidRequestType();
+        }
+
+        $name = $this->JSON['name'];
+        $email = $this->JSON['email'];
+        $password = $this->JSON['password'];
+
+        $result = $this->model->register($name, $email, $password);
+        $this->response($result);
+
+	}
+
     public function getAdminList(){
 		$results = $this->model->getAdminList();
         return $results;
@@ -34,8 +48,7 @@ class Admin extends Api {
     public function logout(){
         unset($_SESSION["admin_name"]);
         unset($_SESSION["admin_id"]);
-
-        header('location:/'); 
+        $this->response(["status" => 200, 'message' => 'Logout Successfully']);
     }
 
     

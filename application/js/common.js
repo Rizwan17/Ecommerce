@@ -13,7 +13,11 @@ async function handleAdminLogout(e){
   e.preventDefault();
 
   try{
-    await fetch(ADMIN_API.ADMIN_LOGOUT);
+    const resp = await fetch(ADMIN_API.ADMIN_LOGOUT);
+    const jsonResp = await resp.json();
+    if(jsonResp.status === 200){
+      redirectTo(adminRoutes.LOGIN);
+    }
   }catch(error){
     console.log(error);
   }

@@ -9,9 +9,13 @@ $order = new Order();
 
 $resp = $order->getCustomerOrders();
 $orders = [];
+$order_status = [];
 if($resp['status'] === 200){
-	$orders = $resp['data'];
+	$orders = $resp['data']['orders'];
+    $order_status = $resp['data']['metaData']['orderStatus'];
 }
+
+// p($resp);
 
 ?>
 
@@ -33,6 +37,7 @@ if($resp['status'] === 200){
                         <th>Order #</th>
                         <th>User #</th>
                         <th>Total Order Amount</th>
+                        <th>Order Status</th>
                         <th>Transaction #</th>
                         <th>Payment Status</th>
                         <th>Paymode</th>
@@ -47,7 +52,8 @@ if($resp['status'] === 200){
                     <tr>
                         <td> <?php echo $order['order_id']; ?> </td>
                         <td> <?php echo $order['user_id']; ?> </td>
-                        <td> <?php echo $order['total_order_amount']; ?> </td>
+                        <td> <?php echo CURRENCY ." ". $order['total_order_amount']; ?> </td>
+                        <td> <?php echo $order['order_status']; ?> </td>
                         <td> <?php echo $order['trx_id']; ?> </td>
                         <td> <?php echo $order['p_status']; ?> </td>
                         <td> <?php echo $order['paymode']; ?> </td>
@@ -80,29 +86,49 @@ if($resp['status'] === 200){
                 </button>
             </div>
             <div class="modal-body">
- <!-- Order Item List -->
-  <table class="orderlist_item_table">
-    <thead>
-      <tr>
-        <th class="orderlist_item_th">Product ID</th>
-        <th class="orderlist_item_th">Name</th>
-        <!-- <th class="orderlist_item_th">Image</th> -->
-        <th class="orderlist_item_th">Price</th>
-        <th class="orderlist_item_th">Quantity</th>
-      </tr>
-    </thead>
-    <tbody id="order-details-table">
-      <!-- Add more rows as needed -->
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="2" class="orderlist_total">Total:</td>
-        <td class="orderlist_total_price"></td>
-        <td class="orderlist_total orderlist_total_qty"></td>
-      </tr>
-    </tfoot>
-  </table>
-</div>
+                <!-- Order Item List -->
+                <table class="orderlist_item_table">
+                    <thead>
+                        <tr>
+                            <th class="orderlist_item_th">Product ID</th>
+                            <th class="orderlist_item_th">Name</th>
+                            <!-- <th class="orderlist_item_th">Image</th> -->
+                            <th class="orderlist_item_th">Price</th>
+                            <th class="orderlist_item_th">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-details-table">
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" class="orderlist_total">Total:</td>
+                            <td class="orderlist_total_price"></td>
+                            <td class="orderlist_total orderlist_total_qty"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div>
+                    <?php
+                        foreach($order_status as $status){
+                            $class = '';
+                            if($status['status'] === 'CONFIRMED'){
+                                $class = "btn-primary";
+                            }else if($status['status'] === "SHIPPED"){
+                                $class = "btn-secondary";
+                            }else if($status['status'] === "OUT_FOR_DELIVERY"){
+                                $class = "btn-success";
+                            }else if($status['status'] === "DELIVERED"){
+                                $class = "btn-danger";
+                            }
+                            ?>
+                                <button class="btn <?php echo $class; ?> order-status-btn btn-sm" disabled value="<?php echo $status['status']; ?>"><?php echo $status['status']; ?></button>
+                            <?php
+                        }
+                    ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>

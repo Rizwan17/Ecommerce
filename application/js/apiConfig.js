@@ -1,5 +1,6 @@
 const ADMIN_API = {
     LOGIN_API: `${adminBaseUrl}/login.php`,
+	REGISTER_API: `${adminBaseUrl}/register.php`,
     CUSTOMER_ORDERS_API: `${adminBaseUrl}/getCustomerOrders.php`,
 	ADD_PRODUCT: `${adminBaseUrl}/product/addProduct.php`,
 	UPDATE_PRODUCT: `${adminBaseUrl}/product/updateProduct.php`,
@@ -14,7 +15,8 @@ const ADMIN_API = {
 	GET_CATEGORY_BY_ID: `${adminBaseUrl}/category/getCategoryById.php`,
 	UPDATE_CATEGORY: `${adminBaseUrl}/category/updateCategoryById.php`,
 	FETCH_ORDER_DETAILS_BY_ID: `${adminBaseUrl}/order/fetchOrderDetailsById.php`,
-	ADMIN_LOGOUT: `${adminBaseUrl}/logout.php`
+	ADMIN_LOGOUT: `${adminBaseUrl}/logout.php`,
+	UPDATE_ORDER_STATUS: `${adminBaseUrl}/order/updateOrderStatus.php`
 };
 
 const buildPayload = (payload, method = 'GET') => {

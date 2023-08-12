@@ -5,6 +5,41 @@ class Order_Model extends Model {
         parent::__construct();
     }
 
+    public function getOrderStatus(){
+        try{
+            $order_status_sql = "SELECT * FROM order_status";
+            $order_status_rows = $this->mysqli_array_result($this->con, $order_status_sql);
+            return $order_status_rows;
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
+
+    public function getNextOrderStatus($order_status = null){
+        $next_status = null;
+        try{
+            switch($order_status){
+                case 'CONFIRMED':
+                    $next_status = 'SHIPPED';
+                    break;
+                case 'SHIPPED':
+                    $next_status = 'OUT_FOR_DELIVERY';
+                    break;
+                case 'OUT_FOR_DELIVERY':
+                    $next_status = 'DELIVERED';
+                    break;
+                case 'DELIVERED':
+                    $next_status = 'COMPLETED';
+                    break;
+                default:
+                    $next_status = 'CONFIRMED';
+                    break;
+            }
+            return $next_status;
+        }catch(Exception $e){
+            return $next_status;
+        }
+    }
     public function createOrder($userId = null, $cart = [], $addressId = null, $paymode = null){
         try{
             $data = [];
@@ -99,14 +134,18 @@ class Order_Model extends Model {
     public function fetchOrderDetails($orderId = null){
         try{
             if($orderId !== null){
-                $sql_orders = "SELECT order_details.product_id, order_qty, purchase_price, products.product_title, products.product_image ,order_details.created_at  
+                $sql_orders = "SELECT orders.order_status, order_details.product_id, order_qty, purchase_price, products.product_title, products.product_image ,order_details.created_at  
                 FROM `orders` 
                 JOIN order_details ON order_details.order_id = orders.order_id 
                 JOIN products ON products.product_id = order_details.product_id
                 WHERE orders.order_id = '$orderId'";
+                $order_status = $this->getOrderStatus();
                 $rows = $this->mysqli_array_result($this->con, $sql_orders);
+                $order_status = $rows[0]['order_status'];
+                $next_status = $this->getNextOrderStatus($order_status);
+
                 if(count($rows) > 0){
-                    return $this->returnResult(200, null, $rows);
+                    return $this->returnResult(200, null, ['orderDetails' => $rows, 'metaData' => ['orderStatus' => $order_status, 'nextStatus' => $next_status]]);
                 }
             }
         }catch(Exception $e){
@@ -116,12 +155,26 @@ class Order_Model extends Model {
 
     public function getCustomerOrders(){
         try{
-            $sql = "SELECT `order_id`, `user_id`, `total_order_amount`, `trx_id`, `p_status`, `paymode`, `created_at`, `updated_at` FROM `orders`";
+            $sql = "SELECT `order_id`, `user_id`, `total_order_amount`, `order_status`, `trx_id`, `p_status`, `paymode`, `created_at`, `updated_at` FROM `orders`";
             $rows = $this->mysqli_array_result($this->con, $sql);
+            $order_status_rows = $this->getOrderStatus();
             if(count($rows) > 0){
-                return $this->returnResult(200, null, $rows);
+                return $this->returnResult(200, null, ['orders' => $rows, 'metaData' => [ 'orderStatus' => $order_status_rows ]]);
             }
             return $this->returnResult(200, null, []);
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage());
+        }
+    }
+
+    public function updateOrderStatus($orderId = null, $status = null){
+        try{
+            $sql = "UPDATE orders SET order_status = '$status' WHERE order_id = '$orderId'";
+            mysqli_query($this->con, $sql);
+            if(mysqli_affected_rows($this->con) > 0){
+                return $this->returnResult(201, "Order updated to ".$status);
+            }
+            return $this->returnResult(200, "Something went wrong");
         }catch(Exception $e){
             return $this->returnResult(500, $e->getMessage());
         }

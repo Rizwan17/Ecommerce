@@ -1,11 +1,32 @@
 const customerOrderList = document.getElementById("customer_order_list");
 
+const handleOrderStatus = async (e, orderId) => {
+    const orderStatus = e.target.value;
+    try{
+        const payload = { 
+            orderId,
+            orderStatus
+        };        
+        const resp = await fetch(ADMIN_API.UPDATE_ORDER_STATUS, buildPayload(payload, 'POST'));
+        const jsonResp = await resp.json();
+        if(jsonResp.status === 201){
+            location.reload();
+        }else{
+            if(jsonResp.message){
+                showToast(jsonResp.message, 'error');
+            }
+        }
+    }catch(error){
+        console.log(error);
+    }
+}
 const handleOrderDetails = async (orderId) => {
     try{
         const resp = await fetch(ADMIN_API.FETCH_ORDER_DETAILS_BY_ID + `?orderId=${orderId}`, buildPayload({}, 'POST'));
         const jsonResp = await resp.json();
         if(jsonResp.status === 200){
-            const orders = jsonResp.body;
+            const orders = jsonResp.body.orderDetails || [];
+            const nextStatus = jsonResp.body.metaData.nextStatus || null;
             const orderDetailsTable = document.getElementById("order-details-table");
             const fragment = document.createDocumentFragment();
 
@@ -52,6 +73,17 @@ const handleOrderDetails = async (orderId) => {
 
             orderDetailsTable.appendChild(fragment);
 
+            document.querySelectorAll('.order-status-btn')
+            .forEach(btn => {
+                console.log(btn.value);
+                if(nextStatus === btn.value){
+                    btn.disabled = false;
+                    btn.classList.remove('btn-sm');
+                    btn.addEventListener('click', (e) => handleOrderStatus(e, orderId));
+                }
+
+            })
+
         }
     }catch(error){
         console.log(error);
@@ -64,4 +96,4 @@ customerOrderList.addEventListener('click', (e) => {
         const orderId = el.getAttribute('orderid');
         handleOrderDetails(orderId);
     }
-})
+});

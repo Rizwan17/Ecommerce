@@ -28,12 +28,11 @@ loadHtmlView('admin/navbar');
 			    <label for="cpassword">Confirm Password</label>
 			    <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Password">
 			  </div>
-			  <input type="hidden" name="admin_register" value="1">
-			  <button type="button" class="btn btn-primary register-btn">Register</button>
+			  <button type="submit" class="btn btn-primary register-btn">Register</button>
 			</form>
 		</div>
 	</div>
 </div>
 
-<!-- <script src="<?php echo getJSScript('admin/login'); ?>"></script> -->
+<script src="<?php echo getJSScript('admin/register'); ?>"></script>
 <?php loadHtmlView('admin/footer'); ?>

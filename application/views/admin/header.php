@@ -19,6 +19,7 @@
     <script defer src="<?php echo getJSScript("urlConfig"); ?>"></script>
     <script defer src="<?php echo getJSScript("apiConfig"); ?>"></script>
     <script defer src="<?php echo getJSScript("common"); ?>"></script>
+    <script defer src="<?php echo getJSScript("utils"); ?>"></script>
 
     <link rel="stylesheet" type="text/css" href="<?php echo getStylesheet("admin-style.css"); ?>" />
 
