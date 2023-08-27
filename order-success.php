@@ -5,8 +5,8 @@ loadHtmlView("header");
 loadController('Order');
 $order = new Order();
 $orders = $order->fetchOrderDetails();
-$orders_array = $orders['data'];
-
+$orders_array = $orders['data']['orderDetails'];
+// p($orders_array);
 
 ?>
 

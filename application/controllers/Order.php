@@ -17,9 +17,11 @@ class Order extends Api {
             $cart = $this->JSON['cart'];
             $addressId = $this->JSON['addressId'];
             $paymode = $this->JSON['paymode'];
+            $payment_status = isset($this->JSON['payment_status']) ? $this->JSON['payment_status'] : null;
+            $trx_id = isset($this->JSON['trx_id']) ? $this->JSON['trx_id'] : null;
             $userId = $_SESSION['uid'];
 
-            $result = $this->model->createOrder($userId, $cart, $addressId, $paymode);
+            $result = $this->model->createOrder($userId, $cart, $addressId, $paymode, $payment_status, $trx_id);
             $this->response($result);
 
         }

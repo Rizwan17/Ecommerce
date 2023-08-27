@@ -36,7 +36,8 @@ $user_non_loggedin_routes = [
     $routes['USER']['LOGIN'],
     $routes['USER']['ORDER_SUCCESS'],
     $routes['USER']['PRODUCT_DETAILS'],
-    $routes['USER']['SIGNUP']
+    $routes['USER']['SIGNUP'],
+    $routes['USER']['CART']
 ];
 
 

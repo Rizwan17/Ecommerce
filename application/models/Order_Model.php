@@ -40,7 +40,7 @@ class Order_Model extends Model {
             return $next_status;
         }
     }
-    public function createOrder($userId = null, $cart = [], $addressId = null, $paymode = null){
+    public function createOrder($userId = null, $cart = [], $addressId = null, $paymode = null, $payment_status = null, $trx_id = null){
         try{
             $data = [];
             $find_user_sql = "SELECT id FROM user_meta_data WHERE user_id = '$userId'";
@@ -70,59 +70,63 @@ class Order_Model extends Model {
                     ];
                 }
             }
+            // if($paymode === 'cod'){
+            $total_order_amount = 0;
+            $purchase_price = [];
+            foreach($cart as $item){
+                $productId = $item['productId'];
+                $qty = $item['qty'];
+                $find_price = "SELECT product_price FROM products WHERE product_id = '$productId'";
+                $price_row = $this->mysqli_array_result($this->con, $find_price);
+                if((count($price_row)) > 0){
+                    $current_price = $price_row[0]['product_price'];
+                    $total_order_amount += $current_price * $qty;
+
+                    $purchase_price[$productId] = $current_price;
+                }
+            }
+
             if($paymode === 'cod'){
-                $total_order_amount = 0;
-                $purchase_price = [];
+                $payment_status = 'pending';
+            }
+                
+            $date = date('Y-m-d H:i:s');
+            $order_place_sql = "INSERT INTO orders (user_id, total_order_amount, trx_id, p_status, paymode, created_at, updated_at) VALUES ('$userId', '$total_order_amount', '$trx_id', '$payment_status', '$paymode', '$date', '$date')";
+            mysqli_query($this->con, $order_place_sql);
+            $affected_rows = mysqli_affected_rows($this->con);
+
+            if($affected_rows > 0){
+                $order_id = mysqli_insert_id($this->con);
+                $data['metaData'] = [
+                    'orderId' => $order_id
+                ];
+                // insert into order_details
+                $order_item_count = 0;
                 foreach($cart as $item){
                     $productId = $item['productId'];
                     $qty = $item['qty'];
-                    $find_price = "SELECT product_price FROM products WHERE product_id = '$productId'";
-                    $price_row = $this->mysqli_array_result($this->con, $find_price);
-                    if((count($price_row)) > 0){
-                        $current_price = $price_row[0]['product_price'];
-                        $total_order_amount += $current_price * $qty;
+                    $prch_price = $purchase_price[$productId];
 
-                        $purchase_price[$productId] = $current_price;
+                    $order_details_sql = "INSERT INTO `order_details`(`order_id`, `product_id`, `order_qty`, `purchase_price`, `created_at`, `updated_at`) VALUES ('$order_id','$productId','$qty','$prch_price','$date','$date')";
+
+                    mysqli_query($this->con, $order_details_sql);
+                    if(mysqli_affected_rows($this->con) > 0){
+                        $order_item_count++;
                     }
                 }
 
-                $date = date('Y-m-d H:i:s');
-                $order_place_sql = "INSERT INTO orders (user_id, total_order_amount, p_status, paymode, created_at, updated_at) VALUES ('$userId', '$total_order_amount', 'pending', 'cod', '$date', '$date')";
-                mysqli_query($this->con, $order_place_sql);
-                $affected_rows = mysqli_affected_rows($this->con);
-
-                if($affected_rows > 0){
-                    $order_id = mysqli_insert_id($this->con);
-                    $data['metaData'] = [
-                        'orderId' => $order_id
-                    ];
-                    // insert into order_details
-                    $order_item_count = 0;
-                    foreach($cart as $item){
-                        $productId = $item['productId'];
-                        $qty = $item['qty'];
-                        $prch_price = $purchase_price[$productId];
-
-                        $order_details_sql = "INSERT INTO `order_details`(`order_id`, `product_id`, `order_qty`, `purchase_price`, `created_at`, `updated_at`) VALUES ('$order_id','$productId','$qty','$prch_price','$date','$date')";
-
-                        mysqli_query($this->con, $order_details_sql);
-                        if(mysqli_affected_rows($this->con) > 0){
-                            $order_item_count++;
-                        }
-                    }
-
-                    if($order_item_count === count($cart)){
-                        loadModel('Cart_Model');
-                        $cartModel = new Cart_Model();
-                        $cartModel->removeItemsFromCart($userId, $cart);
-                        $data['message'] = 'Order placed successfully';
-                    }else{
-                        $data['message'] = 'Failed to place new orders.';
-                    }
+                if($order_item_count === count($cart)){
+                    loadModel('Cart_Model');
+                    $cartModel = new Cart_Model();
+                    $cartModel->removeItemsFromCart($userId, $cart);
+                    $data['message'] = 'Order placed successfully';
                 }else{
-                    $data['message'] = 'Failed to place new orders..';
+                    $data['message'] = 'Failed to place new orders.';
                 }
+            }else{
+                $data['message'] = 'Failed to place new orders..';
             }
+            // }
 
             $result = $this->returnResult(201, null, $data);
             return $result;
