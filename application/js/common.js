@@ -108,7 +108,21 @@ const getTargetElement = (e, className) => {
   return targetElement;
 };
 
+const logout = async () => {
+  try{
+      clearLocalStorageCart();
+
+      const form = document.createElement('form');
+      form.action = API.LOGOUT_API;
+      form.method = 'GET';
+
+      document.body.appendChild(form);
+      form.submit();
+  }catch(e){
+      console.log(e);
+      return {};
+  }
+}
 
 
-
-// updateCartCount();
+updateCartCount();

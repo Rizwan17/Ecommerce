@@ -171,6 +171,38 @@ class Order_Model extends Model {
         }
     }
 
+    public function fetchUserOrders($userId){
+        try{
+            if($userId !== null){
+                $sql = "SELECT products.product_id, orders.order_id, orders.created_at ,product_title, product_image, purchase_price, order_qty, total_order_amount, order_status, paymode, p_status FROM `orders`";
+                $sql .= "JOIN order_details ON orders.order_id = order_details.order_id ";
+                $sql .= "JOIN products ON order_details.product_id = products.product_id ";
+                $sql .= "WHERE user_id = '$userId'";
+                $rows = $this->mysqli_array_result($this->con, $sql);
+                if(count($rows) > 0){
+                    $orders = [];
+                    foreach ($rows as $key => $value) {
+                        $orderId = $value['order_id'];
+                        if(array_key_exists($orderId, $orders)){
+                            array_push($orders[$orderId]['order_items'], $value);
+                        }else{
+                            $orders[$orderId]['order_items'] = [$value];
+                            $orders[$orderId]['paymode'] = $value['paymode'];
+                            $orders[$orderId]['p_status'] = $value['p_status'];
+                            $orders[$orderId]['total_order_amount'] = $value['total_order_amount'];
+                            $orders[$orderId]['created_at'] = $value['created_at'];
+                        }
+                    }
+
+                    return $this->returnResult(200, null, ['orders' => $orders]);
+                }
+                return $this->returnResult(200, null, []);
+            }
+        }catch(Exception $e){
+            return $this->returnResult(500, $e->getMessage()); 
+        }
+    }
+
     public function updateOrderStatus($orderId = null, $status = null){
         try{
             $sql = "UPDATE orders SET order_status = '$status' WHERE order_id = '$orderId'";

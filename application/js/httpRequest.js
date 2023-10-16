@@ -54,22 +54,6 @@ const fetchUserAddress = async (payload) => {
     }
 }
 
-const logout = async () => {
-    try{
-        clearLocalStorageCart();
-
-        const form = document.createElement('form');
-        form.action = API.LOGOUT_API;
-        form.method = 'GET';
-
-        document.body.appendChild(form);
-        form.submit();
-    }catch(e){
-        console.log(e);
-        return {};
-    }
-}
-
 const createOrder = async (payload) => {
     try{
         const resp = await fetch(API.CREATE_ORDER, buildPayload(payload, 'POST'));

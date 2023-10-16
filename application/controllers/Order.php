@@ -27,6 +27,18 @@ class Order extends Api {
         }
     }
 
+    public function fetchUserOrders(){
+        if(!($_SERVER['REQUEST_METHOD'] === 'GET')){
+            $this->invalidRequestType();
+        }else{
+            $userId = $_SESSION['uid'];
+            $result = $this->model->fetchUserOrders($userId);
+            //$this->response($result);
+            return $result;
+        }
+    }
+    
+
     public function fetchOrderDetails(){
         if($_SERVER['REQUEST_METHOD'] !== 'GET'){
             $this->invalidRequestType();
